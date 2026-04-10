@@ -137,12 +137,7 @@ I used Claude Code to generate the test suite based on my baseline implementatio
 
 Once the test suite was ready, I used the two best-performing agents from Approach #1 to implement the Zebra Puzzle Evaluator. I provided them with the test suite and a similar initial prompt:
 
-<details>
-<summary>Prompt</summary>
-
-I would like to write a python program to generate a set of logic puzzles along with their solutions, send them to llms via open router, and then compare the llm generated solutions to the actual solutions. Tests are located in the /tests directory and directions are located in IMPLEMENTATION_GUIDE.md. Your implementation must pass all tests.
-
-</details>
+> I would like to write a python program to generate a set of logic puzzles along with their solutions, send them to llms via open router, and then compare the llm generated solutions to the actual solutions. Tests are located in the /tests directory and directions are located in IMPLEMENTATION_GUIDE.md. Your implementation must pass all tests.
 
 I set the agents to work as autonomously as possible. I granted them maximally permissive execution rights, approved all requested actions, and only intervened when absolutely necessary. After an agent declared it was finished, I ran the test suite and performed the same manual validation used in Approach #1 to ensure a fair comparison.
 
