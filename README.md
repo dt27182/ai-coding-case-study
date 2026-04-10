@@ -32,32 +32,36 @@ The benchmark program consists of three components:
 - **Execution script** — batch-runs puzzles against a configurable set of LLM models via OpenRouter and logs results.
 - **Analysis script** — aggregates results across puzzle configurations into CSV tables to compare model performance across difficulty levels.
 
-> [!note]- Detailed Requirements
-> ### Functional Requirements
->
-> **Puzzle Generation:**
-> 1. The puzzle generator procedurally generates uniquely solvable randomized Zebra puzzles, validated by a CSP solver.
-> 2. The puzzle generator supports varying difficulty, from 1 person with 1 attribute up to 20 people with 20 attributes each.
-> 3. The generated prompt includes natural language clues, a list of all possible attributes and their values, and instructions to output the solution in JSON format with an example.
->
-> **Execution & Evaluation:**
-> 1. The execution script batch executes puzzle generation and evaluation across a configurable range of puzzle configurations and LLM models, specified via command line arguments.
-> 2. The execution script evaluates response correctness for each run by exact match against the expected solution.
-> 3. The execution script logs the puzzle prompt, expected solution, and correctness result for each execution so that individual runs can be retried.
->
-> **Analysis:**
-> 1. The analysis script aggregates results for a single model by processing its log directory and outputting a single CSV containing four tables: pass rates, correct runs, total runs, and error counts.
-> 2. For each table, each row represents a number of people and each column a number of attributes, so the value at row 5, column 3 gives the stat for a 5-person, 3-attribute puzzle.
-> 3. The user runs the script separately for each model and compares the resulting CSVs to evaluate correctness over difficulty and performance across models.
->
-> ### Non-Functional Requirements
->
-> 1. The program is implemented in Python 3.
-> 2. The puzzle generator uses the python-constraint library as the Constraint Satisfaction Problem (CSP) solver to validate puzzle uniqueness.
-> 3. The execution script uses the OpenAI Response API for all LLM interactions.
-> 4. The execution script logs the full OpenRouter API response, parsed LLM solution, and all errors and exceptions encountered during execution.
-> 5. The puzzle generator produces puzzles up to 20×20 in size in under 10 seconds.
-> 6. The execution script runs puzzle and model configuration pairs in parallel, supporting up to 10,000 concurrent executions.
+<details>
+<summary>Detailed Requirements</summary>
+
+### Functional Requirements
+
+**Puzzle Generation:**
+1. The puzzle generator procedurally generates uniquely solvable randomized Zebra puzzles, validated by a CSP solver.
+2. The puzzle generator supports varying difficulty, from 1 person with 1 attribute up to 20 people with 20 attributes each.
+3. The generated prompt includes natural language clues, a list of all possible attributes and their values, and instructions to output the solution in JSON format with an example.
+
+**Execution & Evaluation:**
+1. The execution script batch executes puzzle generation and evaluation across a configurable range of puzzle configurations and LLM models, specified via command line arguments.
+2. The execution script evaluates response correctness for each run by exact match against the expected solution.
+3. The execution script logs the puzzle prompt, expected solution, and correctness result for each execution so that individual runs can be retried.
+
+**Analysis:**
+1. The analysis script aggregates results for a single model by processing its log directory and outputting a single CSV containing four tables: pass rates, correct runs, total runs, and error counts.
+2. For each table, each row represents a number of people and each column a number of attributes, so the value at row 5, column 3 gives the stat for a 5-person, 3-attribute puzzle.
+3. The user runs the script separately for each model and compares the resulting CSVs to evaluate correctness over difficulty and performance across models.
+
+### Non-Functional Requirements
+
+1. The program is implemented in Python 3.
+2. The puzzle generator uses the python-constraint library as the Constraint Satisfaction Problem (CSP) solver to validate puzzle uniqueness.
+3. The execution script uses the OpenAI Response API for all LLM interactions.
+4. The execution script logs the full OpenRouter API response, parsed LLM solution, and all errors and exceptions encountered during execution.
+5. The puzzle generator produces puzzles up to 20×20 in size in under 10 seconds.
+6. The execution script runs puzzle and model configuration pairs in parallel, supporting up to 10,000 concurrent executions.
+
+</details>
 
 # Methodology
 
@@ -133,8 +137,12 @@ I used Claude Code to generate the test suite based on my baseline implementatio
 
 Once the test suite was ready, I used the two best-performing agents from Approach #1 to implement the Zebra Puzzle Evaluator. I provided them with the test suite and a similar initial prompt:
 
-> [!note]- Prompt
-> I would like to write a python program to generate a set of logic puzzles along with their solutions, send them to llms via open router, and then compare the llm generated solutions to the actual solutions. Tests are located in the /tests directory and directions are located in IMPLEMENTATION_GUIDE.md. Your implementation must pass all tests. 
+<details>
+<summary>Prompt</summary>
+
+I would like to write a python program to generate a set of logic puzzles along with their solutions, send them to llms via open router, and then compare the llm generated solutions to the actual solutions. Tests are located in the /tests directory and directions are located in IMPLEMENTATION_GUIDE.md. Your implementation must pass all tests.
+
+</details>
 
 I set the agents to work as autonomously as possible. I granted them maximally permissive execution rights, approved all requested actions, and only intervened when absolutely necessary. After an agent declared it was finished, I ran the test suite and performed the same manual validation used in Approach #1 to ensure a fair comparison.
 
