@@ -1,0 +1,2 @@
+python-constraint==1.4.0
+openai==2.22.0

@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest tests/test_execute_tests.py -v --tb=short -x -k \"not live and not log_format\")",
+      "Bash(.venv/bin/pip install -q -r requirements.txt pytest)",
+      "Bash(.venv/bin/python -m pytest tests/test_execute_tests.py -v --tb=short -k \"not live and not log_format\")",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py -v --tb=short -k \"not large_sizes\")",
+      "Bash(.venv/bin/python -c \":*)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py::test_generate_puzzle_large_sizes_within_timeout -v --tb=short)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py -v --tb=short)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py::test_generate_puzzle_large_sizes_within_timeout tests/test_puzzle_generation.py::test_clue_count_within_reasonable_bounds -v --tb=short)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py -v --tb=line -q)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py -x -q)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py::test_clue_count_within_reasonable_bounds -v -q)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py -v -q)",
+      "Read(//private/tmp/claude-501/**)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py::test_clue_count_within_reasonable_bounds -v)",
+      "Bash(.venv/bin/python test_coverage.py)",
+      "Bash(/tmp/test_direct_adj.py:*)",
+      "Bash(.venv/bin/python /tmp/test_direct_adj.py)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py -v --timeout=120 -x)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py -v)",
+      "Bash(/tmp/test_coverage3.py:*)",
+      "Bash(.venv/bin/python /tmp/test_coverage3.py)",
+      "Bash(/tmp/test_large_sample.py:*)",
+      "Bash(.venv/bin/python /tmp/test_large_sample.py)",
+      "Bash(/tmp/test_csp_distribution.py:*)",
+      "Bash(.venv/bin/python /tmp/test_csp_distribution.py)",
+      "Bash(/tmp/test_large_info.py:*)",
+      "Bash(.venv/bin/python /tmp/test_large_info.py)",
+      "Bash(.venv/bin/python -m pytest tests/test_puzzle_generation.py -q)"
+    ],
+    "additionalDirectories": [
+      "/tmp"
+    ]
+  }
+}

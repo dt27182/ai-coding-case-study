@@ -1,0 +1,15 @@
+=== CORRECT COUNTS ===
+People \ Attributes,4,5,6,7,8,9,10,11
+3,1,1,1,1,0,0,0,0
+
+=== TOTAL COUNTS ===
+People \ Attributes,4,5,6,7,8,9,10,11
+3,1,1,1,1,1,1,1,1
+
+=== PASS RATES ===
+People \ Attributes,4,5,6,7,8,9,10,11
+3,100.00%,100.00%,100.00%,100.00%,0.00%,0.00%,0.00%,0.00%
+
+=== ERROR COUNTS ===
+People \ Attributes,4,5,6,7,8,9,10,11
+3,0,0,0,0,1,0,1,0
