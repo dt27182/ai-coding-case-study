@@ -1,5 +1,3 @@
-# Executive Summary
-
 # Introduction
 
 AI assisted coding has irrevocably changed the way we code today. However, there is a wide spectrum of approaches. Some developers embrace fully hands off agentic workflows, while others prefer to offload only small implementation details to AI or only use LLMs as a smarter Stack Overflow. There is commercially driven hype around agentic AI on one end and unwarranted skepticism grounded in fear and ego on the other.  
@@ -89,7 +87,7 @@ From there, I go back and forth with the agent, providing as little explicit ins
 
 I don't stop until the code meets all functional and nonfunctional requirements. I allow the agent to run its own tests and self correct, but I don't rely on those tests as a verification standard. I primarily verify correctness by manually running the program and validating its input and output behavior. For logic that is difficult to test this way, like CSP based puzzle uniqueness validation, I review the code in detail. I deliberately avoided creating a test suite during this process, since I wanted to evaluate agent performance without one (that experiment comes in Approach #2).
 
-To evaluate this approach, I ran it with five agents: Anti Gravity (w/Gemini 3 Pro), Copilot, Cursor, Cline, and Claude Code (all w/Claude Sonnet 4.5). The discussion below focuses on Claude Code, which was the best performer of the five and serves as the representative for this approach. A full breakdown of all five agents is in [[AI Coding Agent Comparison]].
+To evaluate this approach, I ran it with five agents: Anti Gravity (w/Gemini 3 Pro), Copilot, Cursor, Cline, and Claude Code (all w/Claude Sonnet 4.5). The discussion below focuses on Claude Code, which was the best performer of the five and serves as the representative for this approach. A full breakdown of all five agents is in [[TODO]].
 
 ### How It Played Out
 
