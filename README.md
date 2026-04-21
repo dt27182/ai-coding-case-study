@@ -2,11 +2,19 @@
 
 I reimplemented the same ~800 line Python Puzzle Evaluator program more than 10 times across three AI assisted coding approaches, measuring active developer time and qualitative experience for each.
 
-- **Agent Driven (7h 0m):** An agent drove the full implementation from an open-ended prompt. It felt productive in the moment, but the hidden costs added up: reviewing and correcting the agent's output was taxing ("it is harder to read code than to write it"), and I had to context switch often while waiting for the agent to complete tasks. That said, this approach shines for prototyping and working in unfamiliar domains.
-- **Agent Driven w/ Test Suite (2h 41m):** With the addition of a test suite, Antigravity completed the entire implementation in just 33 minutes with minimal intervention. But that test suite took 2+ hours to create even with a reference implementation to start from — a shortcut most real world projects won't have. And even with clear specifications, agents can still go off course. Claude Code burned a ton of tokens to create some very impressive algorithms, but lacked the sense to know when a simple solution was the right one.
-- **Human Driven (2h 27m):** I designed the architecture and handed off small, well scoped modules to the agent. With each task kept small and constrained, there was almost no review overhead and I never had to correct a bad architectural decision. It felt like a supercharged version of the way I used to program. That said, unlike the agentic approaches, it demands your full attention throughout.
+| Approach | Time | Key Tradeoff |
+|:---|:---|:---|
+| Agent Driven | 7h 0m | High review overhead and frequent context switching |
+| Agent Driven w/ Test Suite | 2h 41m | Fast implementation, but upfront test creation required |
+| Human Driven | 2h 27m | Fastest overall, but requires full attention throughout |
 
-I was surprised that the **Human Driven** approach was the fastest, even in 2026. However, every approach has its place. Agentic vibe coding has a clear role in prototyping and exploration, but still carries huge risks in production without human oversight. Constraining the agent with a test suite mitigates most of these risks, but requires an upfront investment in specification that rarely exists in real world software development. For now, an experienced developer augmented by AI remains more powerful than either one working alone.
+**Agent Driven:** An agent drove the full implementation from an open-ended prompt. It felt productive in the moment, but the hidden costs added up. Reviewing and correcting the agent's output was taxing ("it is harder to read code than to write it"), and I had to context switch often while waiting for the agent to complete tasks. That said, this approach shines for prototyping and working in unfamiliar domains.
+
+**Agent Driven w/ Test Suite:** With the addition of a test suite, Antigravity completed the entire implementation in just 33 minutes with minimal intervention. But that test suite took 2+ hours to create even with a reference implementation to start from — a shortcut most real world projects won't have. And even with clear specifications, agents can still go off course. Claude Code burned a ton of tokens to create some very impressive algorithms, but lacked the sense to know when a simple solution was the right one.
+
+**Human Driven:** I designed the architecture and handed off small, well scoped modules to the agent. With each task kept small and constrained, there was almost no review overhead and I never had to correct a bad architectural decision. It felt like a supercharged version of the way I used to program. That said, unlike the agentic approaches, it demands your full attention throughout.
+
+I was surprised that the **Human Driven** approach was the fastest, even in March 2026. However, every approach has its place. Agentic vibe coding has a clear role in prototyping and exploration, but still carries huge risks in production without human oversight. Constraining the agent with a test suite mitigates most of these risks, but requires an upfront investment in specification that rarely exists in real world software development. For now, an experienced developer augmented by AI remains more powerful than either one working alone.
 
 # Introduction
 
@@ -128,17 +136,6 @@ The agent was also drawn to overengineered solutions. It tried to replace the CS
 ### Time & Effort
 **Total Time Taken:** 7h 0m
 
-```
-Clarifying Q&A & requirements    ~20m
-Architecture guidance            ~1h 30m
-Code review                      ~2h 00m
-Debugging & corrections          ~1h 30m
-Performance optimization         ~1h 20m
-Analysis script                   ~20m
-──────────────────────────────────────
-Total                             ~7h 0m
-```
-
 Overall, this approach felt highly productive in the moment. I was impressed by the agent's ability to drive the implementation, even if it did need my guidance on the architecture and performance optimization. If we rewind just one or two years, watching an AI build a full application from an open-ended prompt would have been a magical experience.
 
 However, it still took 7 hours of active human effort to reach a working implementation. That figure excludes the time the agent spent running autonomously in the background. My active time was overwhelmingly dominated by reviewing, debugging, and correcting the agent's generated code. For many developers, myself included, reviewing large chunks of unfamiliar code is far more mentally draining than simply writing it.
@@ -232,7 +229,7 @@ The human-driven workflow (Approach #3) resulted in the lowest total active time
 
 The results of this case study are specific to the tools I used (Claude Code w/Claude Sonnet, and Antigravity w/Gemini 3.1 Pro) and the specific problem I was solving (the Zebra Puzzle Evaluator). An agent's ability to autonomously implement a program is highly dependent on the problem domain and the model's training data. Python is a relatively simple language with a large amount of training data, so agents are likely to perform better on it than on more obscure languages. Conversely, the CSP solver used in this project is not a commonly used library. This is also a single-operator study, so my coding style, domain expertise, and preferences all influence the results.
 
-The benchmark program itself is fairly simple and niche. It does not represent the common CRUD web and mobile applications that most developers work on, where agents may perform significantly better due to the abundance of similar code in their training data. I also only tested a limited set of models. Claude Code with Opus in particular was excluded due to its cost. Finally, these results are a snapshot of the AI coding landscape in April 2026. Model capabilities are improving rapidly, and the relative effectiveness of these approaches could shift significantly.
+The benchmark program itself is fairly simple and niche. It does not represent the common CRUD web and mobile applications that most developers work on, where agents may perform significantly better due to the abundance of similar code in their training data. I also only tested a limited set of models. Claude Code with Opus in particular was excluded due to its cost. Finally, these results are a snapshot of the AI coding landscape in March 2026. Model capabilities are improving rapidly, and the relative effectiveness of these approaches could shift significantly.
 
 
 # Conclusion
@@ -243,4 +240,4 @@ The test-suite driven approach showed a lot of potential. With good documentatio
 
 Even fully open-ended "vibe coding" has its place. For problem areas where the developer lacks domain knowledge, having an agent generate a first draft is a useful way to learn the landscape quickly, and it is game changing for creating proof of concepts. However, the common pitfalls of vibe coding are still very real. Without an experienced developer verifying the output, you risk encountering security, performance, maintainability, and architectural issues in production.
 
-In April 2026, AI coding tools provide a spectrum of approaches to software development, each with its own strengths and weaknesses. Despite the hype around agentic coding, human-driven coding can still be the most effective approach for many circumstances. At the same time, agentic approaches unlock rapid development in specific situations that would not be possible for a developer to achieve on their own. Like many developers, I'm anxious about the future of software development. But for now, human expertise is still tremendously valuable, and an experienced developer augmented by AI tools is more powerful than ever.
+In March 2026, AI coding tools provide a spectrum of approaches to software development, each with its own strengths and weaknesses. Despite the hype around agentic coding, human-driven coding can still be the most effective approach for many circumstances. At the same time, agentic approaches unlock rapid development in specific situations that would not be possible for a developer to achieve on their own. Like many developers, I'm anxious about the future of software development. But for now, human expertise is still tremendously valuable, and an experienced developer augmented by AI tools is more powerful than ever.
