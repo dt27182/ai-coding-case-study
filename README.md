@@ -32,6 +32,8 @@ Here is an example of a simple 3-person, 2-attribute Zebra puzzle:
 > 3. Bob does not live in the red house.
 > 4. Charlie lives in the green house.
 
+![Benchmark Program Architecture](images/benchmark_architecture.png)
+
 ### High Level Requirements
 
 The benchmark program consists of three components:
@@ -125,6 +127,17 @@ The agent was also drawn to overengineered solutions. It tried to replace the CS
 
 ### Time & Effort
 **Total Time Taken:** 7h 0m
+
+```
+Clarifying Q&A & requirements    ~20m
+Architecture guidance            ~1h 30m
+Code review                      ~2h 00m
+Debugging & corrections          ~1h 30m
+Performance optimization         ~1h 20m
+Analysis script                   ~20m
+──────────────────────────────────────
+Total                             ~7h 0m
+```
 
 Overall, this approach felt highly productive in the moment. I was impressed by the agent's ability to drive the implementation, even if it did need my guidance on the architecture and performance optimization. If we rewind just one or two years, watching an AI build a full application from an open-ended prompt would have been a magical experience.
 
