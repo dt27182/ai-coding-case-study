@@ -20,7 +20,7 @@ I was surprised that the **Human Driven** approach was the fastest, even in Marc
 
 AI assisted coding has irrevocably changed the way we code today, but there is a wide spectrum of approaches, ranging from fully hands-off agentic workflows to using LLMs only as a smarter Stack Overflow. There is commercially driven hype around agentic AI on one side and unwarranted skepticism grounded in fear and ego on the other.
 
-As a developer, I wanted to objectively understand the effectiveness of these different approaches, but I hadn't seen any truly apples-to-apples comparisons in the online discourse. Because developers work with different tech stacks and domains, a fully agentic workflow that works well for a frontend React developer can completely fall apart for an embedded C developer. So I ran my own experiment and reimplemented a benchmark program more than 10 times across different AI coding approaches to compare them head to head.
+As a developer, I wanted to objectively understand the effectiveness of these different approaches, but I hadn't seen any truly apples-to-apples comparisons in the online discourse. Because developers work with different tech stacks and domains, a fully agentic workflow that works well for a frontend React developer can completely fall apart for an embedded C developer. So I ran my own experiment and reimplemented a benchmark program more than 9 times across different AI coding approaches to compare them head to head.
 
 # Benchmark Program (Zebra Puzzle Evaluator)
 *[Source code](reference-impl/)*
