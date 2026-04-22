@@ -112,7 +112,7 @@ From there, the agent leads with clarifying questions to nail down requirements,
 
 I vaildate the agent's implementation as it presents them. The agent runs its own tests and self corrects, but these are not comprehensive. I verify correctness by manually running the program and validating its input and output behavior. For logic that is difficult to test this way, like CSP based puzzle uniqueness validation, I review the code in detail. When the code does not meet the requirements, I prompt the agent to revise the implementation, but I try to let it decide the how as much as possible. I repeat this process until the code meets all functional and nonfunctional requirements. I deliberately avoided creating a test suite during this process, since I wanted to evaluate agent performance without one (that experiment comes in Approach #2).
 
-To evaluate this approach, I ran it with five agents: Anti Gravity (w/Gemini 3 Pro), Copilot, Cursor, Cline, and Claude Code (all w/Claude Sonnet 4.5). The discussion below focuses on Claude Code, which was the best performer of the five and serves as the representative for this approach. A full breakdown of all five agents is in [[TODO]].
+To evaluate this approach, I ran it with five agents: Anti Gravity (w/Gemini 3 Pro), Copilot, Cursor, Cline, and Claude Code (all w/Claude Sonnet 4.5). The discussion below focuses on Claude Code, which was the best performer of the five and serves as the representative for this approach. A full breakdown of all five agents is in [AI Coding Agent Comparison](agent-driven/agent-comparison.md).
 
 ### How It Played Out
 
