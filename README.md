@@ -4,17 +4,17 @@ I reimplemented the same ~800 line Python Puzzle Evaluator program more than 10 
 
 | Approach | Time | Key Tradeoff |
 |:---|:---|:---|
-| Agent Driven | 7h 0m | High review overhead and frequent context switching |
-| Agent Driven w/ Test Suite | 2h 41m | Fast implementation, but upfront test creation required |
+| Agent Driven | 7h 0m | Good for prototyping, but human review is a bottleneck |
+| Agent Driven w/ Test Suite | 2h 41m | Remarkable autonomy, but requires investment in tests |
 | Human Driven | 2h 27m | Fastest overall, but requires full attention throughout |
 
 **Agent Driven:** An agent drove the full implementation from an open-ended prompt. It felt productive in the moment, but the hidden costs added up. Reviewing and correcting the agent's output was taxing ("it is harder to read code than to write it"), and I had to context switch often while waiting for the agent to complete tasks. That said, this approach shines for prototyping and working in unfamiliar domains.
 
-**Agent Driven w/ Test Suite:** With the addition of a test suite, Antigravity completed the entire implementation in an impressive 33 minutes with minimal intervention. But that test suite took 2+ hours to create, and I had the advantage of a reference implementation to guide the test design. Even with clear specifications, agents can still go off course. Claude Code burned a ton of tokens to create some very impressive algorithms, but lacked the sense to know when a simple solution was the right one. 
+**Agent Driven w/ Test Suite:** With a test suite in place, Antigravity completed the entire implementation in an impressive 33 minutes with minimal intervention. The test suite dramatically reduced the review overhead that made Approach #1 so costly and unlocked a level of autonomy that could enable a single engineer to orchestrate multiple agents in parallel. To realize these benefits, teams would need to invest in creating and maintaining comprehensive test suites, which is not currently common practice. Even with a test suite, agents are not infallible — Claude Code over-engineered a solution that Antigravity solved with a simple heuristic — so results will vary.
 
 **Human Driven:** I designed the architecture and handed off small, well scoped modules to the agent. With each task kept small and constrained, there was almost no review overhead and I never had to correct a bad architectural decision. It felt like a supercharged version of the way I used to program. That said, unlike the agentic approaches, it demands your full attention throughout.
 
-I was surprised that the **Human Driven** approach was the fastest, even in March 2026. However, every approach has its place. Agentic vibe coding has a clear role in prototyping and exploration, but still carries huge risks in production without human oversight. Constraining the agent with a test suite mitigates most of these risks, but it means writing tests before code, which is a shift in process for most development teams. For now, an experienced developer augmented by AI remains more powerful than either one working alone.
+I was surprised that the **Human Driven** approach was the fastest, even in March 2026. However, every approach has its place. Agentic vibe coding has a clear role in prototyping and exploration, but still carries huge risks in production without human oversight. A test suite changes that equation by replacing the human review bottleneck with an automated one, but it requires a shift in process for most development teams. For now, an experienced developer augmented by AI remains more powerful than either one working alone.
 
 # Introduction
 
@@ -152,7 +152,7 @@ Furthermore, the approach required a highly fragmented workflow. Whenever the ag
 Create test suite → Agent implements & self-test → Human verifies
 ```
 
-This approach explores the maximal autonomous capabilities of AI coding assistants by providing them with a strict, executable functional specification in the form of a test suite. While many developers are already comfortable letting agents like Claude Code operate autonomously without such guardrails, it is very difficult to objectively evaluate their output in that manner. Using a test suite forces the agent to produce a working implementation that is comparable to the other approaches. Furthermore, Anthropic's recent success building a C compiler with autonomous agents demonstrated that a test suite is often the critical enabler for this kind of work.
+This approach explores how much autonomy an AI coding agent can achieve by providing it with a comprehensive test suite as its guide. Rather than reviewing and correcting the agent's output directly, the human defines success criteria upfront and lets the agent iterate against them. With minimal human intervention, the test suite is also the primary mechanism that ensures the agent's output actually meets the same requirements as the other approaches. Anthropic's recent success building a C compiler with parallel agents demonstrates that a comprehensive test suite is likely the critical enabler for agent autonomy.
 
 ### Phase 1: Test Suite Creation
 **Time Taken:** 2 hours 8 minutes
@@ -184,11 +184,11 @@ In contrast, Antigravity used a much simpler heuristic for the same requirement:
 
 Using Antigravity as the exemplar, the raw speed of the implementation phase is remarkable, more than 10x faster than the agent driven approach. Of course, the total time is significantly longer once you include the ~2 hours spent creating the test suite. I had the advantage of a reference implementation to guide the test design, so that figure is hard to generalize. Test suite creation time will vary significantly depending on the project and the team.
 
-The autonomy this approach unlocks is the far more significant result. In Approach #1, my active time was dominated by reviewing and correcting the agent's code, and that review cost was paid on every implementation cycle. The test suite replaces that bottleneck entirely: the cost of reviewing the agent's work is paid once during test suite creation and amortized across every subsequent iteration. With the human review bottleneck removed, a single developer can orchestrate multiple agents working in parallel, shifting from reviewer to orchestrator.
+The autonomy this approach unlocks is the far more significant result. In Approach #1, my active time was dominated by reviewing and correcting the agent's code, and that review cost was paid on every implementation cycle. The test suite dramatically reduces the human review bottleneck. The cost of reviewing the agent's work is paid once during test suite creation and amortized across every subsequent iteration. With the human review bottleneck removed, a single developer can orchestrate multiple agents working in parallel, shifting from reviewer to orchestrator.
 
 Adopting this approach does require teams to invest in creating and maintaining comprehensive test suites. In my ten years of experience across FAANG and smaller companies, comprehensive test suites are the exception rather than the norm, so this represents a real process change. That said, TDD is well documented, and AI itself can help make writing and maintaining tests easier.
 
-The approach has tremendous potential, but it is not a silver bullet. Claude Code's over-engineering of the clue distribution requirement shows that agents can still go off course even with a comprehensive test suite and an agent's ability to autonomously iterate will vary with the problem domain and its training data.
+The approach has tremendous potential, but it is not a silver bullet. Claude Code's over-engineering of the clue distribution requirement shows that agents can still go off course even with a comprehensive test suite.
 
 ## Approach #3: Human Driven Implementation
 *[Source code](human-driven/)*
@@ -196,7 +196,8 @@ The approach has tremendous potential, but it is not a silver bullet. Claude Cod
 ```
 Human designs architecture & splits out modules → Agent implements module → Human reviews & integrates
 ```
-In this approach, the human maintains the mental picture of how the program should be structured and hands off only small, well-scoped modules to the AI coding assistant. I used Claude Code (w/Claude Sonnet 4.6), since it was the best performer from Approach #1. This is the approach I take by default, though I was starting to wonder if it was antiquated in 2026. For the Zebra Puzzle Evaluator, examples of individual offloaded tasks include:
+
+In this approach, the human maintains the mental picture of how the program should be structured and hands off only small, well-scoped modules to the AI coding assistant. I used Claude Code (w/Claude Sonnet 4.6), since it was the best performer from Approach #1. This is the approach I used in the past 2 years, but I was starting to wonder if it was antiquated in 2026. For the Zebra Puzzle Evaluator, examples of individual offloaded tasks include:
 
 - Translating puzzle clues into CSP constraints
 - Implementing the clue generation workflow with CSP-based uniqueness verification
