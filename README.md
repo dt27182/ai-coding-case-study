@@ -10,7 +10,7 @@ I reimplemented the same ~800 line Python Puzzle Evaluator program more than 10 
 
 **Agent Driven:** An agent drove the full implementation from an open-ended prompt. It felt productive in the moment, but the hidden costs added up. Reviewing and correcting the agent's output was taxing ("it is harder to read code than to write it"), and I had to context switch often while waiting for the agent to complete tasks. That said, this approach shines for prototyping and working in unfamiliar domains.
 
-**Agent Driven w/ Test Suite:** With a test suite in place, Antigravity completed the entire implementation in an impressive 33 minutes with minimal intervention. The test suite dramatically reduced the review overhead that made Approach #1 so costly and unlocked a level of autonomy that could enable a single engineer to orchestrate multiple agents in parallel. To realize these benefits, teams would need to invest in creating and maintaining comprehensive test suites, which is not currently common practice. Even with a test suite, agents are not infallible — Claude Code over-engineered a solution that Antigravity solved with a simple heuristic — so results will vary.
+**Agent Driven w/ Test Suite:** With a test suite in place, Antigravity completed the entire implementation in an impressive 33 minutes with minimal intervention. The test suite dramatically reduced the review overhead that made Approach #1 so costly and unlocked a level of autonomy that could enable a single engineer to orchestrate multiple agents in parallel. To realize these benefits, teams would need to invest in creating and maintaining comprehensive test suites, which is not currently common practice. Even with a test suite, agents can go off course, so results will vary.
 
 **Human Driven:** I designed the architecture and handed off small, well scoped modules to the agent. With each task kept small and constrained, there was almost no review overhead and I never had to correct a bad architectural decision. It felt like a supercharged version of the way I used to program. That said, unlike the agentic approaches, it demands your full attention throughout.
 
@@ -197,14 +197,14 @@ The approach has tremendous potential, but it is not a silver bullet. Claude Cod
 Human designs architecture & splits out modules → Agent implements module → Human reviews & integrates
 ```
 
-In this approach, the human maintains the mental picture of how the program should be structured and hands off only small, well-scoped modules to the AI coding assistant. I used Claude Code (w/Claude Sonnet 4.6), since it was the best performer from Approach #1. This is the approach I used in the past 2 years, but I was starting to wonder if it was antiquated in 2026. For the Zebra Puzzle Evaluator, examples of individual offloaded tasks include:
+In this approach, the human maintains the mental picture of how the program should be structured and hands off only small, well-scoped modules to the AI coding assistant. I used Claude Code (w/Claude Sonnet 4.6), since it was the best performer from Approach #1. This is the approach I have been using for the past 2 years, but I was starting to wonder if it was antiquated in 2026. For the Zebra Puzzle Evaluator, examples of individual offloaded tasks include:
 
 - Translating puzzle clues into CSP constraints
 - Implementing the clue generation workflow with CSP-based uniqueness verification
 - Implementing parallelized batch model evaluation via the OpenAI Response API
 - Generating the entire analysis script from a single prompt
 
-I verified each task immediately after the agent implemented it, making corrections directly in the IDE diff. After the full implementation was complete, I performed the same manual verification used in Approach #1 to ensure comparability across all three approaches.
+I verified each task immediately after the agent implemented it, making corrections directly in the IDE diff. After the full implementation was complete, I performed the same manual verification used in Approach #1 to ensure that all 3 approaches were held up to the same standard.
 
 ### How It Played Out
 
@@ -212,14 +212,16 @@ The agent performed very well on the modules I offloaded to it, implementing alm
 
 I spent very little time reviewing and revising the agent's work. Because each task was small and self contained, even the more complex modules like the CSP verification of puzzle uniqueness were easy to review. I also never had to steer the agent away from bad architectural decisions or over engineered solutions, so course correction was minimal. The key to being productive here is keeping all tasks small and easy to verify.
 
-I then stitched together the modules by hand, which felt extremely satisfying. It was like a supercharged version of the way I used to program, because all the tedious implementations were taken care of by the agent and I could build, test, and iterate much more quickly.
+I then stitched together the modules by hand, which felt extremely satisfying. It was like a supercharged version of the way I used to program, because the agent made each iteration so cheap that I could experiment freely. I tried multiple clue generation strategies, deferred interface decisions knowing the agent could refactor both sides later, and moved on quickly when something didn't pan out.
 
 ### Time & Effort
 **Total Time Taken:** 2h 27m
 
-At roughly 2.5 hours, this approach took about a third of the time of the fully agent driven Approach #1. The approach I thought might be antiquated turned out to be the most effective one I tested. By making the high level design decisions myself, I eliminated the overhead of reviewing large chunks of code, correcting bad architectural choices, and steering the agent away from over engineered solutions. The agent was most effective when I gave it a clear, constrained task and let it execute, rather than asking it to figure out what to build.
+At roughly 2.5 hours, this approach took about a third of the time of the fully agent driven Approach #1. The approach I thought might be antiquated turned out to be the fastest one I tested. By making the high level design decisions myself, I eliminated the overhead of reviewing large chunks of code, correcting bad architectural choices, and steering the agent away from over engineered solutions.
 
-The entire process was smooth and trouble free. I was always engaged and iterating quickly, never waiting too long for the agent to finish or context switching to fill dead time. That said, this approach does demand your full attention as a developer. Unlike the agent driven approaches, you cannot have the agent work in the background while you do something else. But even beyond the time savings, I found this approach very satisfying as a software developer. I still got to build and shape the code myself, just faster and without the tedious bits.
+But the time savings tell only part of the story. Because the agent could implement and refactor modules so quickly, it fundamentally lowered the cost of experimentation. I didn't need to commit to a complete design upfront. I could explore, iterate, and let the architecture emerge through building. That is how most software actually gets built, and this approach supports that process rather than fighting it.
+
+That said, this approach does demand your full attention as a developer. Unlike the agent driven approaches, you cannot have the agent work in the background while you do something else. But even beyond the efficiency, I found it deeply satisfying. I still got to build and shape the code myself, just faster and without the tedious bits.
 
 # Limitations
 
