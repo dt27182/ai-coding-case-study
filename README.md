@@ -1,6 +1,6 @@
 # Executive Summary
 
-In March 2026, I reimplemented the same ~800 line Python Puzzle Evaluator program more than 9 times across three AI assisted coding approaches, measuring active developer time and qualitative experience for each.
+In March 2026, I reimplemented the same ~800 line Python Puzzle Generator program more than 9 times across three AI assisted coding approaches, measuring active developer time and qualitative experience for each.
 
 | Approach | Time | Key Tradeoff |
 |:---|:---|:---|
@@ -86,7 +86,7 @@ The benchmark program consists of three components:
 I reimplemented the Zebra Puzzle Evaluator with 3 different approaches, ensuring each implementation met the exact functional and nonfunctional requirements of the original program. The approaches are:
 
 1. **Agent Driven:** Provide basic requirements, let the agent ask clarifying questions and generate a solution, then review and revise.
-2. **Agent Driven w/ Test Suite:** Provide basic requirements alongside a comprehensive test suite to guide the agent's autonomous iteration.
+2. **Agent Driven w/ Test Suite:** Provide basic requirements alongside a comprehensive test suite and then let agent autonomously implement.
 3. **Human Driven:** Prompt the agent to implement small, isolated modules, then manually stitch them together.
 
 Because all three approaches produced the same end result, I could evaluate them along two axes:
