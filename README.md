@@ -1,6 +1,6 @@
 # Executive Summary
 
-In March 2026, I reimplemented the same ~800 line Python Puzzle Generator program more than 9 times across three AI assisted coding approaches, measuring active developer time and qualitative experience for each.
+Agentic coding has improved a lot in the past year, but I wanted to understand for myself how far it's come. In March 2026, I reimplemented the same ~800 line Python Puzzle Generator program more than 9 times across three AI coding approaches, measuring active developer time for each.
 
 | Approach | Time | Key Tradeoff |
 |:---|:---|:---|
@@ -10,11 +10,11 @@ In March 2026, I reimplemented the same ~800 line Python Puzzle Generator progra
 
 **Agent Driven:** An agent drove the full implementation from an open-ended prompt. It felt productive in the moment, but the hidden costs added up. Reviewing and correcting the agent's output was taxing ("it is harder to read code than to write it"), and I had to context switch often while waiting for the agent to complete tasks. That said, this approach shines for prototyping and working in unfamiliar domains.
 
-**Agent Driven w/ Test Suite:** With a test suite in place, Antigravity completed the entire implementation in an impressive 33 minutes with minimal intervention. The test suite dramatically reduced the review overhead that made Approach #1 so costly and unlocked a level of autonomy that could enable a single engineer to orchestrate multiple agents in parallel. To realize these benefits, teams would need to invest in creating and maintaining comprehensive test suites, which is not currently common practice. Even with a test suite, agents can go off course, so results will vary.
+**Agent Driven w/ Test Suite:** With a test suite in place, Antigravity completed the entire implementation in an impressive 33 minutes with minimal intervention. The test suite dramatically reduced the review overhead in Approach #1 and unlocked a level of autonomy that could enable a single developer to actually orchestrate multiple agents in parallel. To get these benefits, teams would need to invest in creating and maintaining comprehensive test suites, which is not currently common practice. Even with a test suite, agents can go off course, so results will vary.
 
 **Human Driven:** I designed the architecture and handed off small, well scoped modules to the agent. With each task kept small and constrained, there was almost no review overhead and I never had to correct a bad architectural decision. The agent's speed also lowered the cost of experimentation, letting me try multiple approaches and refine the design as I went. That said, unlike the agentic approaches, it demands your full attention throughout.
 
-I was surprised that the **Human Driven** approach was the fastest. However, every approach has its place. Agentic vibe coding has a clear role in prototyping and exploration, but still carries huge risks in production without human oversight. A test suite changes that equation by replacing the human review bottleneck with an automated one, but it requires a shift in process for most development teams. For now, an experienced developer augmented by AI remains more powerful than either one working alone.
+Even in 2026, a human developer driving the implementation can still be by far the most effective technique. However, every approach has its place. Vibe coding has a clear role in prototyping and exploration, but still carries huge risks in production without human oversight. A test suite changes that equation by replacing the human review bottleneck with an automated one, but it requires a shift in process for most development teams. For now, an experienced developer augmented by AI remains more powerful than either one working alone.
 
 # Introduction
 
@@ -219,7 +219,7 @@ I then stitched together the modules by hand, which felt extremely satisfying. I
 
 At roughly 2.5 hours, this approach took about a third of the time of the fully agent driven Approach #1. The approach I thought might be antiquated turned out to be the fastest one I tested. By making the high level design decisions myself, I eliminated the overhead of reviewing large chunks of code, correcting bad architectural choices, and steering the agent away from over engineered solutions.
 
-But the time savings tell only part of the story. Because the agent could implement and refactor modules so quickly, it fundamentally lowered the cost of experimentation. I didn't need to commit to a complete design upfront. I could explore, iterate, and let the architecture emerge through building. That is how most software actually gets built, and this approach supports that process rather than fighting it.
+But the time savings tell only part of the story. Because the agent could implement and refactor modules so quickly, it dramatically lowered the cost of experimentation. I didn't need to commit to a complete design upfront. I could explore, iterate, and let the architecture emerge through building. That is how most software actually gets built, and this approach supports that process rather than fighting it.
 
 That said, this approach does demand your full attention as a developer. Unlike the agent driven approaches, you cannot have the agent work in the background while you do something else. But even beyond the efficiency, I found it deeply satisfying. I still got to build and shape the code myself, just faster and without the tedious bits.
 
@@ -231,9 +231,9 @@ The benchmark program itself is fairly simple and niche. It does not represent t
 
 # Conclusion
 
-The most surprising result of this case study is that the human-driven approach was the fastest. The old software engineering adage that "it is harder to read code than to write it" is just as relevant as ever. Reviewing agent-generated code and working with it to get it correct took roughly three times longer than designing the architecture myself and handing off targeted modules. But the speed wasn't even the most interesting result. By making each iteration so cheap, the agent lowered the cost of experimentation and let the architecture emerge through building. Building software is inherently iterative, and this approach supercharges that process, especially for experienced developers.
+Even in 2026, a human developer driving the implementation can still be by far the most effective technique. The old software engineering adage that "it is harder to read code than to write it" is just as relevant as ever. Reviewing agent-generated code and working with it to get it correct took roughly three times longer than designing the architecture myself and handing off targeted modules. But the speed wasn't even the most interesting result. By making each iteration so cheap, the agent lowered the cost of experimentation and let the architecture emerge through building. Building software is inherently iterative, and this approach supercharges that process, especially for experienced developers.
 
-The test-suite driven approach demonstrated a fundamentally different capability. By replacing human review with an automated test suite, it eliminated the bottleneck that dominated the plain agent driven approach and unlocked a level of autonomy that could truly enable a single engineer to orchestrate multiple agents in parallel. The barrier to adopting this approach is mainly organizational. It requires teams to invest in creating and maintaining comprehensive test suites.
+The test-suite driven approach shows a lot of potential. By replacing human review with an automated test suite, it eliminated the bottleneck that dominated the plain agent driven approach and unlocked a level of autonomy that could actualy enable a single engineer to orchestrate multiple agents in parallel. The barrier to adopting this approach is mainly organizational. It requires teams to invest in creating and maintaining comprehensive test suites.
 
 Even fully open-ended "vibe coding" has its place. For problem areas where the developer lacks domain knowledge, having an agent generate a first draft is a useful way to learn the landscape quickly, and it is game changing for creating proof of concepts. However, the common pitfalls of vibe coding are still very real. Without an experienced developer verifying the output, you risk encountering security, performance, maintainability, and architectural issues in production.
 
